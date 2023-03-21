@@ -128,29 +128,84 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
+	NO* pos = posicaoElemento(novo->valor);
+	
+	if (pos == NULL)
+
 	{
-		primeiro = novo;
-	}
-	else
-	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		if (primeiro == NULL)
+		{
+			primeiro = novo;
 		}
-		aux->prox = novo;
+		else
+		{
+			// procura o final da lista
+			NO* aux = primeiro;
+			while (aux->prox != NULL) {
+				aux = aux->prox;
+			}
+			aux->prox = novo;
+		}
 	}
 }
 
 void excluirElemento()
 {
+	NO* exc = (NO*)malloc(sizeof(NO));
+	if (exc == NULL)
+	{
+		return;
+	}
+	cout << "Digite o elemento que deseja excluir: \n";
+	cin >> exc->valor;
+	exc->prox = NULL;
+
+	NO* pos = posicaoElemento(exc->valor);
+
+	if (pos != NULL)
+	{
+		if (pos == primeiro)
+		{
+			primeiro = primeiro->prox;
+		}
+
+		else
+		{
+			NO* aux = primeiro;
+			while (aux->prox != pos)
+			{
+				aux = aux->prox;
+			}
+			aux->prox = pos->prox;
+			free(pos);
+		}
+	}
+
 	
 }
 
 void buscarElemento()
 {
+	NO* busc = (NO*)malloc(sizeof(NO));
+	if (busc == NULL)
+	{
+		return;
+	}
+
+	cout << "Digite o elemento que deseja buscar: \n";
+	cin >> busc->valor;
+	busc->prox = NULL;
+
+	NO* pos = posicaoElemento(busc->valor);
 	
+	if (pos != NULL)
+	{
+		cout << "O elemento encontrado " <<endl;
+	}
+	else
+	{
+		cout << "O elemento digitado nao existe " <<endl;
+	}
 }
 
 
